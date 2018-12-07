@@ -12,7 +12,7 @@ winner_dict = {
     2:'Computer'
 }
 
-round = 1
+ronde = 1
 
 user_name = input("Wat is je naam: ")
 winner_dict[1] = user_name
@@ -68,20 +68,20 @@ while True:
        elif not int(rounds) or rounds not in ['3', '5', '7']:
            print('Kies alleen 3, 5 of 7')
        else:
-           while round <= int(rounds):
+           while ronde <= int(rounds):
                user_input = input('Steen(1), papier(2) of schaar(3):')
                if not user_input or user_input not in ['1', '2', '3']:
                    print('Kies alleen 1, 2 of 3')
                    continue
                gameround(user_input)
-               round += 1
+               ronde += 1
 
     except ValueError:
        print("Je moet een cijfer invullen")
        print("Geen letter(s)")
     again = input('Nog een spelletje? (j/n)').lower()
     if again == 'j':
-        round = 1
+        ronde = 1
         continue
     else:
         break
