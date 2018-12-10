@@ -4,15 +4,15 @@ from tkinter import *
 import tkinter.messagebox
 
 rockpaperscissors = {
-    1:'Steen',
-    2:'Papier',
-    3:'Schaar'
+    1: 'Steen',
+    2: 'Papier',
+    3: 'Schaar'
     }
 
 winner_dict = {
-    0:'Equal',
-    1:'User',
-    2:'Computer'
+    0: 'Equal',
+    1: 'User',
+    2: 'Computer'
 }
 rounds = 0
 ronde = 1
@@ -30,17 +30,33 @@ def usernameFill(event):
 def roundsFill(event):
     global rounds
     rounds = entryRounds.get()
+    # if username is not set in previous <Return> event do it again
+    global user_name
+    user_name = entryUser.get()
+    askUsername['text'] = user_name
+    winner_dict[1] = user_name
     showBuutons()
 
 
+def startGameButton():
+    global rounds
+    rounds = entryRounds.get()
+    # if username is not set in previous <Return> event do it again
+    global user_name
+    user_name = entryUser.get()
+    askUsername['text'] = user_name
+    winner_dict[1] = user_name
+    showBuutons()
 
-# m = Menuutje(root)
+
+# vraag de gamer om naam:
 askUsername = Label(root, text="Wat is je naam wat kom je doen je lijkt me aardig:")
 askUsername.grid(row=0, column=0)
 entryUser = Entry(root)
 entryUser.grid(row=0, column=1)
 entryUser.bind("<Return>", usernameFill)
 
+# de steen papier schaar knoppen
 def steenKeus():
     gameround(1)
     checkNogeens()
@@ -64,9 +80,9 @@ winner_dict[1] = user_name
 score_user = 0
 score_computer = 0
 labelText = Label(root, text='')
-labelText.grid(row=1, column=0)
+labelText.grid(row=3, column=0, columnspan=3)
 labelRound = Label(root, text='')
-labelRound.grid(row=2, column=0)
+labelRound.grid(row=4, column=0, columnspan=3)
 
 # ronde functie
 def gameround(user_choice):
@@ -76,6 +92,7 @@ def gameround(user_choice):
     global labelText
     global labelRound
     global ronde
+    global winner_dict
 
     roundwinner = 0
 
@@ -83,7 +100,6 @@ def gameround(user_choice):
         labelText['text'] = f'Je koos {rockpaperscissors[int(user_choice)]} en Computer koos {rockpaperscissors[computer_choice]}'
         roundwinner = 1
         score_user += 1
-
 
     elif int(user_choice) == 2 and computer_choice == 1:
         labelText['text'] = f'Je koos {rockpaperscissors[int(user_choice)]} en Computer koos {rockpaperscissors[computer_choice]}'
@@ -123,45 +139,54 @@ def showBuutons():
         elif not int(rounds) or rounds not in ['3', '5', '7']:
             tkinter.messagebox.showinfo('Oneven nummers', 'Kies alleen 3, 5 of 7')
         else:
-            steen.grid(row=1, column=1)
+            steen.grid(row=2, column=0)
 
-            papier.grid(row=1, column=2)
-            schaar.grid(row=1, column=3)
+            papier.grid(row=2, column=1)
+            schaar.grid(row=2, column=2)
 
 
     except ValueError:
         tkinter.messagebox.showinfo('Alleen cijfers', 'Je moet een cijfer invullen, Geen letter(s)')
 
-# hoofd ronde loop functie
 
+# toon de totaal scores:
+def showScores():
+    global score_computer
+    global score_user
+    global winner_dict
+
+    tkinter.messagebox.showinfo('Totaal score',
+                                f'De computer heeft {score_computer} keer gewonnen \n {winner_dict[1]} heeft {score_user} keer gewonnen')
+    exit()
+
+
+
+# hoofd ronde loop functie
 
 def checkNogeens():
     global ronde
     global rounds
     again = 'init'
-    if ronde is rounds:
+    if ronde > int(rounds):
         again = tkinter.messagebox.askquestion('Nog eens', 'Wil je nog een keer?')
+        print('Doet ie ut of doet ie ut niet')
     if again == 'yes':
         ronde = 1
     elif again == 'init':
         print(f'Niks te doen; ronde {ronde} van {rounds} rondes')
     else:
-        exit()
+        showScores()
 
 
+# vraag om hoeveel rondes
 askRounds = Label(root, text="Hoeveel rondes?(3/5/7):")
-askRounds.grid(row=3, column=0)
+askRounds.grid(row=1, column=0)
 entryRounds = Entry(root)
-entryRounds.grid(row=3, column=1)
+entryRounds.grid(row=1, column=1)
 entryRounds.bind("<Return>", roundsFill)
-
-
-
-
+saveNameRounds = Button(root, text='Start', command=startGameButton)
+saveNameRounds.grid(row=1, column=2)
 # Print scores
-scoresPC = Label(root, text=f'De computer heeft {score_computer} keer gewonnen')
-scoresUser = Label(root, text=f'{winner_dict[1]} heeft {score_user} keer gewonnen\n')
-scoresPC.grid(row=4, column=0)
-scoresUser.grid(row=5, column=0)
+
 
 root.mainloop()
