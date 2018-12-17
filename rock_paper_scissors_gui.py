@@ -49,12 +49,7 @@ def startGameButton():
     showBuutons()
 
 
-# vraag de gamer om naam:
-askUsername = Label(root, text="Wat is je naam wat kom je doen je lijkt me aardig:")
-askUsername.grid(row=0, column=0)
-entryUser = Entry(root)
-entryUser.grid(row=0, column=1)
-entryUser.bind("<Return>", usernameFill)
+
 
 # de steen papier schaar knoppen
 def steenKeus():
@@ -127,10 +122,8 @@ def gameround(user_choice):
         labelRound['text'] = f'{winner_dict[roundwinner]} wins\n'
     ronde += 1
 
-# while loop voor de echte rondes
 
 # show de buttons als de input klopt
-
 def showBuutons():
     try:
         val = int(rounds)
@@ -177,7 +170,13 @@ def checkNogeens():
     else:
         showScores()
 
-
+# hoofdscherm
+# vraag de gamer om naam:
+askUsername = Label(root, text="Wat is je naam wat kom je doen je lijkt me aardig:")
+askUsername.grid(row=0, column=0)
+entryUser = Entry(root)
+entryUser.grid(row=0, column=1)
+entryUser.bind("<Return>", usernameFill)
 # vraag om hoeveel rondes
 askRounds = Label(root, text="Hoeveel rondes?(3/5/7):")
 askRounds.grid(row=1, column=0)
