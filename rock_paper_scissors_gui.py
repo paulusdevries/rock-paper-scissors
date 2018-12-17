@@ -74,6 +74,7 @@ schaar = Button(root, text="Schaar", command=schaarKeus)
 winner_dict[1] = user_name
 score_user = 0
 score_computer = 0
+equal_score = 0
 labelText = Label(root, text='')
 labelText.grid(row=3, column=0, columnspan=3)
 labelRound = Label(root, text='')
@@ -88,6 +89,7 @@ def gameround(user_choice):
     global labelRound
     global ronde
     global winner_dict
+    global equal_score
 
     roundwinner = 0
 
@@ -109,6 +111,7 @@ def gameround(user_choice):
     elif int(user_choice) == computer_choice:
         labelText['text'] = f'Je koos {rockpaperscissors[int(user_choice)]} en Computer koos {rockpaperscissors[computer_choice]}'
         roundwinner = 0
+        equal_score += 1
 
 
     else:
@@ -149,7 +152,7 @@ def showScores():
     global winner_dict
 
     tkinter.messagebox.showinfo('Totaal score',
-                                f'De computer heeft {score_computer} keer gewonnen \n {winner_dict[1]} heeft {score_user} keer gewonnen')
+                                f'De computer heeft {score_computer} keer gewonnen \n{winner_dict[1]} heeft {score_user} keer gewonnen \n{equal_score} keer gelijkspel')
     exit()
 
 
