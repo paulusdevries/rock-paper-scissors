@@ -1,5 +1,4 @@
-import random, sys
-from menu import Menuutje
+import random
 from tkinter import *
 import tkinter.messagebox
 
@@ -168,8 +167,8 @@ def emptyGrid():
     labelText['text'] = ''
     entryRounds.delete(0, END)
 
-
 # hoofd ronde loop functie
+
 
 def checkNogeens():
     global ronde
@@ -177,14 +176,32 @@ def checkNogeens():
     again = 'init'
     if ronde > int(rounds):
         again = tkinter.messagebox.askquestion('Nog eens', 'Wil je nog een keer?')
-        print('Doet ie ut of doet ie ut niet')
+        # debug printing commented
+        # print('Doet ie ut of doet ie ut niet')
     if again == 'yes':
         ronde = 1
         emptyGrid()
-    elif again == 'init':
-        print(f'Niks te doen; ronde {ronde} van {rounds} rondes')
-    else:
+    elif again == "no":
         showScores()
+
+
+class MenuGameRPS:
+    def __init__(self, master):
+        menu = Menu(master)
+        master.config(menu=menu)
+
+        subMenu = Menu(menu)
+        menu.add_cascade(label="File", menu=subMenu)
+        subMenu.add_command(label="New Game...", command=self.newGame)
+        subMenu.add_separator()
+        subMenu.add_command(label="Exit", command=self.exitGame)
+
+    def exitGame(self):
+        exit()
+
+    def newGame(self):
+        emptyGrid()
+
 
 # hoofdscherm
 # vraag de gamer om naam:
@@ -203,5 +220,5 @@ saveNameRounds = Button(root, text='Start', command=startGameButton)
 saveNameRounds.grid(row=1, column=2)
 # Print scores
 
-
+menu = MenuGameRPS(root)
 root.mainloop()

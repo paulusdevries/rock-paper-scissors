@@ -21,3 +21,23 @@ class Menuutje:
 
     def doNothing(self):
         print("Okay I do nothing..")
+
+
+class MenuGameRPS:
+    def __init__(self, master):
+        menu = Menu(master)
+        master.config(menu=menu)
+
+        subMenu = Menu(menu)
+        menu.add_cascade(label="File", menu=subMenu)
+        subMenu.add_command(label="New Game...", command=self.newGame)
+        subMenu.add_separator()
+        subMenu.add_command(label="Exit", command=self.exitGame)
+
+
+    def exitGame(self):
+        exit()
+
+
+    def newGame(self):
+
