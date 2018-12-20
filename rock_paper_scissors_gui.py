@@ -1,4 +1,4 @@
-import random
+import random, sys
 from tkinter import *
 import tkinter.messagebox
 
@@ -152,7 +152,7 @@ def showScores():
 
     tkinter.messagebox.showinfo('Totaal score',
                                 f'De computer heeft {score_computer} keer gewonnen \n{winner_dict[1]} heeft {score_user} keer gewonnen \n{equal_score} keer gelijkspel')
-    exit()
+    sys.exit()
 
 # scherm legen
 
@@ -197,7 +197,7 @@ class MenuGameRPS:
         subMenu.add_command(label="Exit", command=self.exitGame)
 
     def exitGame(self):
-        exit()
+        sys.exit()
 
     def newGame(self):
         emptyGrid()
