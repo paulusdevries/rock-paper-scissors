@@ -155,6 +155,18 @@ def showScores():
                                 f'De computer heeft {score_computer} keer gewonnen \n{winner_dict[1]} heeft {score_user} keer gewonnen \n{equal_score} keer gelijkspel')
     exit()
 
+# scherm legen
+
+def emptyGrid():
+    global labelRound
+    global labelText
+    global entryRounds
+    steen.grid_forget()
+    papier.grid_forget()
+    schaar.grid_forget()
+    labelRound['text'] = ''
+    labelText['text'] = ''
+    entryRounds.delete(0, END)
 
 
 # hoofd ronde loop functie
@@ -168,6 +180,7 @@ def checkNogeens():
         print('Doet ie ut of doet ie ut niet')
     if again == 'yes':
         ronde = 1
+        emptyGrid()
     elif again == 'init':
         print(f'Niks te doen; ronde {ronde} van {rounds} rondes')
     else:
